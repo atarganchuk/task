@@ -5,7 +5,7 @@ const factorial = (num) => {
     if (num && parseInt(num)) {
         let fact = 1;
         for (let i = 1; i <= num; i++) {
-        fact = fact * i;
+            fact = fact * i;
         }
         result.innerHTML = fact;
     } else {
@@ -20,7 +20,7 @@ const stringLength = (string) => {
     if (stringArr.length && stringArr.length > 0) {
         biggest = stringArr[0];
         stringArr.forEach(item => {
-        if (biggest.length < item.length) biggest = item
+            if (biggest.length < item.length) biggest = item
         })
         result.innerHTML = biggest.length;
     } else {
@@ -44,8 +44,8 @@ const arrBiggestGet = (inputs) => {
 
     if (inputs.length) {
         inputs.forEach(item => {
-        let arrNew = item.value.split(/[ ,]+/);
-        arrResult.push(arrNew);
+            let arrNew = item.value.split(/[ ,]+/);
+            arrResult.push(arrNew);
         })
     }
     arrBiggestCalc(arrResult);
@@ -66,7 +66,7 @@ const stringCut = (string, number) => {
     }
 }
 
-//5
+// 5
 const typography = (string) => {
     let result = document.querySelector('.typography__result'),
         converted = "";
@@ -91,13 +91,31 @@ const typography = (string) => {
     }
 }
 
+// 6
+const combine = (col, number) => {
+    let num = parseInt(number),
+        arrSource = [],
+        arrTarget = [],
+        result = document.querySelector('.combine__result');
+    if (col.length && col.length > 1) {
+        arrSource.push(col[0].value.split(/[ ,]+/));
+        arrTarget.push(col[1].value.split(/[ ,]+/));
+    } else {
+        result.innerHTML = "nothing to convert"
+    }
+    console.log(arrSource);
+    console.log(arrTarget);
+}
+
+
 //inits
 document.addEventListener('DOMContentLoaded', e => {
     const factorialsStart = document.querySelector('.factorials__btn'),
             lengthStart = document.querySelector('.length__btn'),
             biggestStart = document.querySelector('.largestArr__btn'),
             stringCutStart = document.querySelector('.stringCut__btn'),
-            typographyStart = document.querySelector('.typography__btn');
+            typographyStart = document.querySelector('.typography__btn'),
+            combineStart = document.querySelector('.combine__btn');
 
     // 1
     factorialsStart.addEventListener('click', e => {
@@ -124,14 +142,22 @@ document.addEventListener('DOMContentLoaded', e => {
     stringCutStart.addEventListener('click', e => {
         e.preventDefault();
         let stringSource = document.querySelector('.stringCut__string').value,
-            cutCount = document.querySelector('.stringCut__number').value;
-        stringCut(stringSource, cutCount);
+            numberSource = document.querySelector('.stringCut__number').value;
+        stringCut(stringSource, numberSource);
     })
 
-    //5
+    // 5
     typographyStart.addEventListener('click', e => {
         e.preventDefault();
         let stringSource = document.querySelector('.typography__string').value;
         typography(stringSource);
+    })
+
+    // 6
+    combineStart.addEventListener('click', e => {
+        e.preventDefault();
+        let stringSource = document.querySelectorAll('.combine__arr'),
+            numberSource = document.querySelector('.combine__number').value;
+        combine(stringSource, numberSource);
     })
 })
