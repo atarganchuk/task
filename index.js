@@ -109,34 +109,38 @@ const combine = (arrSource, arrTarget, number) => {
     return arrTarget;
 }
 
-
 // 7
+const DEMO_FALSY = [false, 123, "asd", null, undefined, false, 0n, 0, "qwe", true];
 const falsy = (arrSource) => {
-    const resultArr = falsyTypes(arrSource.split(/[ ,]+/));
+    const resultArr = falsyTypes(arrSource.split(/[ ,]+/)),
+        converted = [];
 
     resultArr.forEach((item, i) => {
-        if (!item) {
-            resultArr.splice(i, 1);
-        }
+        console.log(typeof item + "=" + item)
+        if (item) converted.push(item);
     })
 
-    console.log(resultArr);
+    console.log(converted);
 }
 
 const falsyTypes = (arrSource) => {
+    const nu = null;
     arrSource.forEach((item, i) => {
         switch (item) {
+            case "true":
+                arrSource.splice(i, 1, true);
+                break;
             case "false":
                 arrSource.splice(i, 1, false);
                 break;
             case "0":
-                arrSource.splice(i, 1, 0);
+                arrSource.splice(i, 1, parseInt(item));
                 break;
             case "0n":
                 arrSource.splice(i, 1, 0n);
                 break;
             case "null":
-                arrSource.splice(i, 1, null);
+                arrSource.splice(i, 1, nu);
                 break;
             case "undefined":
                 arrSource.splice(i, 1, undefined);
