@@ -92,19 +92,28 @@ const typography = (string) => {
 }
 
 // 6
-const combine = (col, number) => {
+const combineInit = (col, number) => {
     const num = parseInt(number),
         result = document.querySelector('.combine__result');
     if (col.length && col.length > 1) {
-        col[0].value.split(/[ ,]+/);
-        col[1].value.split(/[ ,]+/);
+        result.innerHTML = combine(col[0].value.split(/[ ,]+/), col[1].value.split(/[ ,]+/), num);
     } else {
         result.innerHTML = "nothing to convert"
     }
-    console.log(col[0].value.split(/[ ,]+/));
-    console.log(col[1].value.split(/[ ,]+/));
 }
 
+const combine = (arrSource, arrTarget, number) => {
+    arrSource.forEach((index, i) => {
+        arrTarget.splice(number + i, 0, index);
+    })
+    return arrTarget;
+}
+
+
+// 7
+const falsy = (arrSource) => {
+
+}
 
 //inits
 document.addEventListener('DOMContentLoaded', e => {
@@ -113,7 +122,8 @@ document.addEventListener('DOMContentLoaded', e => {
             biggestStart = document.querySelector('.largestArr__btn'),
             stringCutStart = document.querySelector('.stringCut__btn'),
             typographyStart = document.querySelector('.typography__btn'),
-            combineStart = document.querySelector('.combine__btn');
+            combineStart = document.querySelector('.combine__btn'),
+            falsyStart = document.querySelector('.falsy__btn');
 
     // 1
     factorialsStart.addEventListener('click', e => {
@@ -156,6 +166,11 @@ document.addEventListener('DOMContentLoaded', e => {
         e.preventDefault();
         const stringSource = document.querySelectorAll('.combine__arr'),
             numberSource = document.querySelector('.combine__number').value;
-        combine(stringSource, numberSource);
+        combineInit(stringSource, numberSource);
+    })
+    falsyStart.addEventListener('click', e => {
+        e.preventDefault();
+        const stringSource = document.querySelectorAll('.falsy__arr');
+        combineInit(stringSource, numberSource);
     })
 })
