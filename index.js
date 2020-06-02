@@ -172,6 +172,29 @@ const comparison = (arrSource) => {
     return status
 }
 
+// 9
+const separationInit = (arrSource, number) => {
+    const num = parseInt(number),
+        result = document.querySelector('.separation__result'),
+        converted = arrSource.split(/[ ,]+/);
+
+    result.innerHTML = separation(converted, num);
+}
+
+const separation = (arrSource, number) => {
+    arrSource.forEach(item => {
+        let count = Math.round(item.length / number),
+            from = 0;
+            newArr = [];
+
+        for (let i = 0; i < count; i++) {
+            from = from + number;
+
+            item.slice(from, number)
+        }
+    })
+}
+
 // inits
 document.addEventListener('DOMContentLoaded', e => {
     const factorialsStart = document.querySelector('.factorials__btn'),
@@ -181,7 +204,8 @@ document.addEventListener('DOMContentLoaded', e => {
             typographyStart = document.querySelector('.typography__btn'),
             combineStart = document.querySelector('.combine__btn'),
             falsyStart = document.querySelector('.falsy__btn'),
-            comparisonStart = document.querySelector('.comparison__btn');
+            comparisonStart = document.querySelector('.comparison__btn'),
+            separationStart = document.querySelector('.separation__btn');
 
     // 1
     factorialsStart.addEventListener('click', e => {
@@ -239,5 +263,13 @@ document.addEventListener('DOMContentLoaded', e => {
         e.preventDefault();
         const stringSource = document.querySelectorAll('.comparison__arr');
         comparisonInit(stringSource);
+    })
+
+    // 9
+    separationStart.addEventListener('click', e => {
+        e.preventDefault();
+        const stringSource = document.querySelector('.separation__arr').value,
+                numberSource = document.querySelector('.separation__number').value;
+        separationInit(stringSource, numberSource);
     })
 })
