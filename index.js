@@ -110,17 +110,14 @@ const combine = (arrSource, arrTarget, number) => {
 }
 
 // 7
-const DEMO_FALSY = [false, 123, "asd", null, undefined, false, 0n, 0, "qwe", true];
 const falsy = (arrSource) => {
-    const resultArr = falsyTypes(arrSource.split(/[ ,]+/)),
+    const result = document.querySelector('.falsy__result'),
+        resultArr = falsyTypes(arrSource.split(/[ ,]+/)),
         converted = [];
 
-    resultArr.forEach((item, i) => {
-        console.log(typeof item + "=" + item)
-        if (item) converted.push(item);
-    })
+    resultArr.forEach((item, i) => (item)? converted.push(item) : false)
 
-    console.log(converted);
+    result.innerHTML = converted;
 }
 
 const falsyTypes = (arrSource) => {
