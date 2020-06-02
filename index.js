@@ -154,7 +154,25 @@ const falsyTypes = (arrSource) => {
     return arrSource
 }
 
-//inits
+// 8
+const comparisonInit = (arrSource) => {
+    const result = document.querySelector('.comparison__result'),
+        converted = [];
+
+    if (arrSource && arrSource.length) arrSource.forEach(item => converted.push(item.value))
+
+    result.innerHTML = comparison(converted);
+}
+
+const comparison = (arrSource) => {
+    let status = true;
+    
+    [...arrSource[0]].forEach(item => {if (![...arrSource[1]].some(elem => elem === item)) status = false});
+
+    return status
+}
+
+// inits
 document.addEventListener('DOMContentLoaded', e => {
     const factorialsStart = document.querySelector('.factorials__btn'),
             lengthStart = document.querySelector('.length__btn'),
@@ -162,7 +180,8 @@ document.addEventListener('DOMContentLoaded', e => {
             stringCutStart = document.querySelector('.stringCut__btn'),
             typographyStart = document.querySelector('.typography__btn'),
             combineStart = document.querySelector('.combine__btn'),
-            falsyStart = document.querySelector('.falsy__btn');
+            falsyStart = document.querySelector('.falsy__btn'),
+            comparisonStart = document.querySelector('.comparison__btn');
 
     // 1
     factorialsStart.addEventListener('click', e => {
@@ -213,5 +232,12 @@ document.addEventListener('DOMContentLoaded', e => {
         e.preventDefault();
         const stringSource = document.querySelector('.falsy__arr').value;
         falsy(stringSource);
+    })
+
+    // 8
+    comparisonStart.addEventListener('click', e => {
+        e.preventDefault();
+        const stringSource = document.querySelectorAll('.comparison__arr');
+        comparisonInit(stringSource);
     })
 })
