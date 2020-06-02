@@ -60,7 +60,7 @@ const stringCut = (string, number) => {
     const num = parseInt(number),
         result = document.querySelector('.stringCut__result');
     if (string.length > number) {
-        result.innerHTML = string.slice(0, num) + "..."
+        result.innerHTML = `${string.slice(0, num)}...`
     } else {
         result.innerHTML = "nothing to convert"
     }
@@ -82,7 +82,7 @@ const typography = (string) => {
                 }
             }
 
-            if (newArr.length - 1 !== i) converted = converted + " "
+            if (newArr.length - 1 !== i) converted = `${converted} `
         })
 
         result.innerHTML = converted;
@@ -112,7 +112,45 @@ const combine = (arrSource, arrTarget, number) => {
 
 // 7
 const falsy = (arrSource) => {
+    const resultArr = falsyTypes(arrSource.split(/[ ,]+/));
 
+    resultArr.forEach((item, i) => {
+        if (!item) {
+            resultArr.splice(i, 1);
+        }
+    })
+
+    console.log(resultArr);
+}
+
+const falsyTypes = (arrSource) => {
+    arrSource.forEach((item, i) => {
+        switch (item) {
+            case "false":
+                arrSource.splice(i, 1, false);
+                break;
+            case "0":
+                arrSource.splice(i, 1, 0);
+                break;
+            case "0n":
+                arrSource.splice(i, 1, 0n);
+                break;
+            case "null":
+                arrSource.splice(i, 1, null);
+                break;
+            case "undefined":
+                arrSource.splice(i, 1, undefined);
+                break;
+            case "NaN":
+                arrSource.splice(i, 1, NaN);
+                break;
+            default:
+                arrSource.splice(i, 1, item);
+                break;
+        }
+    })
+
+    return arrSource
 }
 
 //inits
@@ -168,9 +206,11 @@ document.addEventListener('DOMContentLoaded', e => {
             numberSource = document.querySelector('.combine__number').value;
         combineInit(stringSource, numberSource);
     })
+
+    // 7
     falsyStart.addEventListener('click', e => {
         e.preventDefault();
-        const stringSource = document.querySelectorAll('.falsy__arr');
-        combineInit(stringSource, numberSource);
+        const stringSource = document.querySelector('.falsy__arr').value;
+        falsy(stringSource);
     })
 })
