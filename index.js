@@ -1,6 +1,6 @@
 // 1
 const factorial = (num) => {
-    let result = document.querySelector('.factorials__result');
+    const result = document.querySelector('.factorials__result');
 
     if (num && parseInt(num)) {
         let fact = 1;
@@ -15,7 +15,7 @@ const factorial = (num) => {
 
 // 2
 const stringLength = (string) => {
-    let result = document.querySelector('.length__result'),
+    const result = document.querySelector('.length__result'),
         stringArr = string.split(/[ ,]+/);
     if (stringArr.length && stringArr.length > 0) {
         biggest = stringArr[0];
@@ -57,7 +57,7 @@ const getMaxOfArray = (numArray) => {
 
 // 4
 const stringCut = (string, number) => {
-    let num = parseInt(number),
+    const num = parseInt(number),
         result = document.querySelector('.stringCut__result');
     if (string.length > number) {
         result.innerHTML = string.slice(0, num) + "..."
@@ -93,18 +93,16 @@ const typography = (string) => {
 
 // 6
 const combine = (col, number) => {
-    let num = parseInt(number),
-        arrSource = [],
-        arrTarget = [],
+    const num = parseInt(number),
         result = document.querySelector('.combine__result');
     if (col.length && col.length > 1) {
-        arrSource.push(col[0].value.split(/[ ,]+/));
-        arrTarget.push(col[1].value.split(/[ ,]+/));
+        col[0].value.split(/[ ,]+/);
+        col[1].value.split(/[ ,]+/);
     } else {
         result.innerHTML = "nothing to convert"
     }
-    console.log(arrSource);
-    console.log(arrTarget);
+    console.log(col[0].value.split(/[ ,]+/));
+    console.log(col[1].value.split(/[ ,]+/));
 }
 
 
@@ -120,28 +118,28 @@ document.addEventListener('DOMContentLoaded', e => {
     // 1
     factorialsStart.addEventListener('click', e => {
         e.preventDefault();
-        let stringSource = document.querySelector('.factorials__input');
+        const stringSource = document.querySelector('.factorials__input');
         factorial(stringSource.value);
     })
 
     // 2
     lengthStart.addEventListener('click', e => {
         e.preventDefault();
-        let stringSource = document.querySelector('.length__input');
+        const stringSource = document.querySelector('.length__input');
         stringLength(stringSource.value);
     })
 
     // 3
     biggestStart.addEventListener('click', e => {
         e.preventDefault();
-        let stringSource = document.querySelectorAll('.largestArr__input');
+        const stringSource = document.querySelectorAll('.largestArr__input');
         arrBiggestGet(stringSource);
     })
 
     // 4
     stringCutStart.addEventListener('click', e => {
         e.preventDefault();
-        let stringSource = document.querySelector('.stringCut__string').value,
+        const stringSource = document.querySelector('.stringCut__string').value,
             numberSource = document.querySelector('.stringCut__number').value;
         stringCut(stringSource, numberSource);
     })
@@ -149,14 +147,14 @@ document.addEventListener('DOMContentLoaded', e => {
     // 5
     typographyStart.addEventListener('click', e => {
         e.preventDefault();
-        let stringSource = document.querySelector('.typography__string').value;
+        const stringSource = document.querySelector('.typography__string').value;
         typography(stringSource);
     })
 
     // 6
     combineStart.addEventListener('click', e => {
         e.preventDefault();
-        let stringSource = document.querySelectorAll('.combine__arr'),
+        const stringSource = document.querySelectorAll('.combine__arr'),
             numberSource = document.querySelector('.combine__number').value;
         combine(stringSource, numberSource);
     })
