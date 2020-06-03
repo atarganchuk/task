@@ -183,8 +183,8 @@ const separation = (arrSource, size) => {
             newArr.push([...item].slice(from, to).join(""))
             from = from + size;
         }
-        arrSource.push(newArr)
-        console.log(arrSource)
+
+        console.log(newArr.map(item => [item]))
     })
 }
 
