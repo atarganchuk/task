@@ -171,16 +171,20 @@ const separationInit = (arrSource, number) => {
     result.innerHTML = separation(converted, num);
 }
 
-const separation = (arrSource, number) => {
+const separation = (arrSource, size) => {
     arrSource.forEach(item => {
-        const count = Math.round(item.length / number);
+        const count = Math.round(item.length / size);
         const newArr = [];
         let from = 0;
+        let to = 0;
 
         for (let i = 0; i < count; i++) {
-            from = from + number;
-            item.slice(from, number)
+            to = to + size;
+            newArr.push([...item].slice(from, to).join(""))
+            from = from + size;
         }
+        arrSource.push(newArr)
+        console.log(arrSource)
     })
 }
 
