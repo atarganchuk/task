@@ -2,7 +2,7 @@
 const factorial = (num) => {
     const result = document.querySelector('.factorials__result');
 
-    if (num && parseInt(num)) {
+    if (parseInt(num) !== NaN) {
         let fact = 1;
         for (let i = 1; i <= num; i++) {
             fact = fact * i;
@@ -15,8 +15,9 @@ const factorial = (num) => {
 
 // 2
 const stringLength = (string) => {
-    const result = document.querySelector('.length__result'),
-        stringArr = string.split(/[ ,]+/);
+    const result = document.querySelector('.length__result');
+    const stringArr = string.split(/[ ,]+/);
+
     if (stringArr.length && stringArr.length > 0) {
         biggest = stringArr[0];
         stringArr.forEach(item => {
@@ -29,60 +30,52 @@ const stringLength = (string) => {
 }
 
 // 3
+const getMaxOfArray = (numArray) => {
+    return Math.max.apply(null, numArray);
+}
+
 const arrBiggestCalc = (arrResult) => {
-    let arrMax = [],
-        result = document.querySelector('.largestArr__result');
+    const result = document.querySelector('.largestArr__result');
+    const arrMax = [];
+
     arrResult.forEach(item => {
-        let converted = item.map(elem => parseInt(elem));
+        const converted = item.map(elem => parseInt(elem));
+
         arrMax.push(getMaxOfArray(converted));
     })
     result.innerHTML = arrMax;
 }
 
 const arrBiggestGet = (inputs) => {
-    let arrResult = [];
+    const arrResult = [];
 
     if (inputs.length) {
         inputs.forEach(item => {
-            let arrNew = item.value.split(/[ ,]+/);
+            const arrNew = item.value.split(/[ ,]+/);
             arrResult.push(arrNew);
         })
     }
     arrBiggestCalc(arrResult);
 }
 
-const getMaxOfArray = (numArray) => {
-    return Math.max.apply(null, numArray);
-}
-
 // 4
 const stringCut = (string, number) => {
-    const num = parseInt(number),
-        result = document.querySelector('.stringCut__result');
-    if (string.length > number) {
-        result.innerHTML = `${string.slice(0, num)}...`
-    } else {
-        result.innerHTML = "nothing to convert"
-    }
+    const num = parseInt(number);
+    const result = document.querySelector('.stringCut__result');
+
+    (string.length > number) ? result.innerHTML = `${string.slice(0, num)}...` : result.innerHTML = string;
 }
 
 // 5
 const typography = (string) => {
-    let result = document.querySelector('.typography__result'),
-        converted = "";
+    const result = document.querySelector('.typography__result');
+    let converted = "";
+
     if (string.length) {
-        let newArr = string.split(/[ ,]+/);
+        const newArr = string.split(/[ ,]+/);
 
         newArr.forEach((item, i) => {
-            for (let i = 0; i < item.length; i++) {
-                if (i === 0) {
-                    converted = converted + item[i].toUpperCase();
-                } else {
-                    converted = converted + item[i].toLowerCase();
-                }
-            }
-
-            if (newArr.length - 1 !== i) converted = `${converted} `
+            converted = `${converted} ${[...item].map((e, i) => (i === 0)? e.toUpperCase() : e.toLowerCase()).join("")}`
         })
 
         result.innerHTML = converted;
@@ -93,8 +86,9 @@ const typography = (string) => {
 
 // 6
 const combineInit = (col, number) => {
-    const num = parseInt(number),
-        result = document.querySelector('.combine__result');
+    const num = parseInt(number);
+    const result = document.querySelector('.combine__result');
+
     if (col.length && col.length > 1) {
         result.innerHTML = combine(col[0].value.split(/[ ,]+/), col[1].value.split(/[ ,]+/), num);
     } else {
@@ -103,25 +97,22 @@ const combineInit = (col, number) => {
 }
 
 const combine = (arrSource, arrTarget, number) => {
-    arrSource.forEach((index, i) => {
-        arrTarget.splice(number + i, 0, index);
-    })
-    return arrTarget;
+    const newArr = [...arrTarget];
+    newArr.splice(number, 0, ...arrSource)
+    return newArr;
 }
 
 // 7
 const falsy = (arrSource) => {
-    const result = document.querySelector('.falsy__result'),
-        resultArr = falsyTypes(arrSource.split(/[ ,]+/)),
-        converted = [];
+    const result = document.querySelector('.falsy__result');
+    const resultArr = falsyTypes(arrSource.split(/[ ,]+/));
+    let converted = [];
 
     resultArr.forEach((item, i) => (item)? converted.push(item) : false)
-
     result.innerHTML = converted;
 }
 
 const falsyTypes = (arrSource) => {
-    const nu = null;
     arrSource.forEach((item, i) => {
         switch (item) {
             case "true":
@@ -137,7 +128,7 @@ const falsyTypes = (arrSource) => {
                 arrSource.splice(i, 1, 0n);
                 break;
             case "null":
-                arrSource.splice(i, 1, nu);
+                arrSource.splice(i, 1, null);
                 break;
             case "undefined":
                 arrSource.splice(i, 1, undefined);
@@ -156,40 +147,38 @@ const falsyTypes = (arrSource) => {
 
 // 8
 const comparisonInit = (arrSource) => {
-    const result = document.querySelector('.comparison__result'),
-        converted = [];
+    const result = document.querySelector('.comparison__result');
+    const converted = [];
 
     if (arrSource && arrSource.length) arrSource.forEach(item => converted.push(item.value))
-
     result.innerHTML = comparison(converted);
 }
 
 const comparison = (arrSource) => {
     let status = true;
     
-    [...arrSource[0]].forEach(item => {if (![...arrSource[1]].some(elem => elem === item)) status = false});
+    [...arrSource[1]].forEach(item => {if (![...arrSource[0]].some(elem => elem.toLowerCase() === item.toLowerCase())) status = false});
 
     return status
 }
 
 // 9
 const separationInit = (arrSource, number) => {
-    const num = parseInt(number),
-        result = document.querySelector('.separation__result'),
-        converted = arrSource.split(/[ ,]+/);
+    const num = parseInt(number);
+    const result = document.querySelector('.separation__result');
+    const converted = arrSource.split(/[ ,]+/);
 
     result.innerHTML = separation(converted, num);
 }
 
 const separation = (arrSource, number) => {
     arrSource.forEach(item => {
-        let count = Math.round(item.length / number),
-            from = 0;
-            newArr = [];
+        const count = Math.round(item.length / number);
+        const newArr = [];
+        let from = 0;
 
         for (let i = 0; i < count; i++) {
             from = from + number;
-
             item.slice(from, number)
         }
     })
@@ -197,15 +186,15 @@ const separation = (arrSource, number) => {
 
 // inits
 document.addEventListener('DOMContentLoaded', e => {
-    const factorialsStart = document.querySelector('.factorials__btn'),
-            lengthStart = document.querySelector('.length__btn'),
-            biggestStart = document.querySelector('.largestArr__btn'),
-            stringCutStart = document.querySelector('.stringCut__btn'),
-            typographyStart = document.querySelector('.typography__btn'),
-            combineStart = document.querySelector('.combine__btn'),
-            falsyStart = document.querySelector('.falsy__btn'),
-            comparisonStart = document.querySelector('.comparison__btn'),
-            separationStart = document.querySelector('.separation__btn');
+    const factorialsStart = document.querySelector('.factorials__btn');
+    const lengthStart = document.querySelector('.length__btn');
+    const biggestStart = document.querySelector('.largestArr__btn');
+    const stringCutStart = document.querySelector('.stringCut__btn');
+    const typographyStart = document.querySelector('.typography__btn');
+    const combineStart = document.querySelector('.combine__btn');
+    const falsyStart = document.querySelector('.falsy__btn');
+    const comparisonStart = document.querySelector('.comparison__btn');
+    const separationStart = document.querySelector('.separation__btn');
 
     // 1
     factorialsStart.addEventListener('click', e => {
@@ -231,8 +220,8 @@ document.addEventListener('DOMContentLoaded', e => {
     // 4
     stringCutStart.addEventListener('click', e => {
         e.preventDefault();
-        const stringSource = document.querySelector('.stringCut__string').value,
-            numberSource = document.querySelector('.stringCut__number').value;
+        const stringSource = document.querySelector('.stringCut__string').value;
+        const numberSource = document.querySelector('.stringCut__number').value;
         stringCut(stringSource, numberSource);
     })
 
@@ -246,8 +235,8 @@ document.addEventListener('DOMContentLoaded', e => {
     // 6
     combineStart.addEventListener('click', e => {
         e.preventDefault();
-        const stringSource = document.querySelectorAll('.combine__arr'),
-            numberSource = document.querySelector('.combine__number').value;
+        const stringSource = document.querySelectorAll('.combine__arr');
+        const numberSource = document.querySelector('.combine__number').value;
         combineInit(stringSource, numberSource);
     })
 
@@ -268,8 +257,8 @@ document.addEventListener('DOMContentLoaded', e => {
     // 9
     separationStart.addEventListener('click', e => {
         e.preventDefault();
-        const stringSource = document.querySelector('.separation__arr').value,
-                numberSource = document.querySelector('.separation__number').value;
+        const stringSource = document.querySelector('.separation__arr').value;
+        const numberSource = document.querySelector('.separation__number').value;
         separationInit(stringSource, numberSource);
     })
 })
