@@ -44,6 +44,7 @@ const arrBiggestCalc = (arrResult) => {
         arrMax.push(getMaxOfArray(converted));
     })
     result.innerHTML = arrMax;
+    console.log(arrMax)
 }
 
 const arrBiggestGet = (inputs) => {
@@ -91,6 +92,7 @@ const combineInit = (col, number) => {
 
     if (col.length && col.length > 1) {
         result.innerHTML = combine(col[0].value.split(/[ ,]+/), col[1].value.split(/[ ,]+/), num);
+        console.log(combine(col[0].value.split(/[ ,]+/), col[1].value.split(/[ ,]+/), num))
     } else {
         result.innerHTML = "nothing to convert"
     }
@@ -110,6 +112,7 @@ const falsy = (arrSource) => {
 
     resultArr.forEach((item, i) => (item)? converted.push(item) : false)
     result.innerHTML = converted;
+    console.log(converted);
 }
 
 const falsyTypes = (arrSource) => {
@@ -151,6 +154,7 @@ const comparisonInit = (arrSource) => {
     const converted = [];
 
     if (arrSource && arrSource.length) arrSource.forEach(item => converted.push(item.value))
+    console.log(comparison(converted))
     result.innerHTML = comparison(converted);
 }
 
