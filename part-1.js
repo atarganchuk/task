@@ -192,6 +192,23 @@ const separation = (arrSource, size) => {
     })
 }
 
+// 10
+const recursion = (arrSource, number) => {
+    const calcArr = (arrToRec) => {
+        arrToRec.forEach(elem => {
+            if (Array.isArray(elem) && !elem.length) {
+                const data = Array.from({ length: number }, (item, index) => index + 1).reverse();
+                data.map(item => elem.push(item))
+            } else {
+                calcArr(elem)
+            }
+        })
+    }
+    
+    console.log(arrSource);
+    return calcArr(arrSource);
+}
+
 // inits
 document.addEventListener('DOMContentLoaded', e => {
     const factorialsStart = document.querySelector('.factorials__btn');
@@ -203,6 +220,7 @@ document.addEventListener('DOMContentLoaded', e => {
     const falsyStart = document.querySelector('.falsy__btn');
     const comparisonStart = document.querySelector('.comparison__btn');
     const separationStart = document.querySelector('.separation__btn');
+    const recursionStart = document.querySelector('.recursion__btn');
 
     // 1
     factorialsStart.addEventListener('click', e => {
@@ -268,5 +286,13 @@ document.addEventListener('DOMContentLoaded', e => {
         const stringSource = document.querySelector('.separation__arr').value;
         const numberSource = document.querySelector('.separation__number').value;
         separationInit(stringSource, numberSource);
+    })
+
+    // 10
+    recursionStart.addEventListener('click', e => {
+        e.preventDefault();
+        const numberSource = document.querySelector('.recursion__number').value;
+        const demoArrForRecu = [[],[[],[]],[[[],[]],[[],[]]]];
+        recursion(demoArrForRecu, numberSource);
     })
 })
