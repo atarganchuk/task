@@ -1,0 +1,18 @@
+{
+  "name": "testFunctionJS",
+  "version": "1.0.0",
+  "description": "Тесты для функций JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --env=jsdom --verbose"
+  },
+  "author": "vsmirnova",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^6.2.2"
+  },
+  "dependencies": {
+    "jest": "^26.0.1",
+    "yargs": "^15.3.1"
+  }
+}
