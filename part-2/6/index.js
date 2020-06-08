@@ -1,12 +1,6 @@
-// Написать функцию, которая осуществляет поиск и замену в предложении. Первый аргумент - это строка,
-// в которой осуществляется поиск и замена. Второй аргумент - это слово, которое нужно заменить,
-// третий аргумент - слово, на которое нужно заменить. При замене сохраняйте регистр
-// первого символа в исходном слове.
-
-const calc = (str, find, target) => {
-    console.log(str.toLowerCase().indexOf(find))
-    
+const calc = (str, target, rep) => {
+    const regIndex = str.toUpperCase().search(target.toUpperCase());
+    return `${str.slice(0, regIndex)}${(str.charAt(regIndex).toUpperCase() === str.charAt(regIndex)) ? rep.charAt(0).toUpperCase() + rep.slice(1) : rep}${str.slice(regIndex + target.length)}`
 }
 
-calc("Hello World!", "world", "earth")
 module.exports = calc;
