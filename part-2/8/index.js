@@ -1,9 +1,9 @@
-//Написать функцию, которая принимает два или более массивов и возвращает новый массив уникальных значений. 
-//Значения должны быть отсортированы по их первоначальному порядку.
-
-const calc = (...arr) => {
-    const inc = [...arr]
-    console.log(inc)
+const calc = (...args) => {
+    const inc = [...args]
+    if (inc.length) {
+        const newArr = inc.reduce((a, b) => a.concat(b));
+        return [...new Set(newArr)]
+    }
 }
-calc([1,2,3], [1,2,3])
-// module.exports = calc;
+
+module.exports = calc;
