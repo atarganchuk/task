@@ -1,10 +1,5 @@
 const calc = (a, b) => {
-    if (a && b) {
-        return a + b
-    } else {
-        return (b) => calc()
-    }
+    if (!b) return (b) => a + b
+    return a + b 
 }
-
-console.log(calc(2))
-// module.exports = calc;
+module.exports = calc;
